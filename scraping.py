@@ -105,16 +105,17 @@ def hemispheres(browser):
 
     hemisphere_image_urls = []
 
-    for i in range(4):
+
+    for x in range(4):
+        hemispheres = {}
         html = browser.html
         hemisphere_soup = soup(html, 'html.parser')
         slide_elem = hemisphere_soup.select_one('div.list_text')
-        browser.links.find_by_partial_text('Hemisphere')[i].click()
+        browser.find_by_css('a.product-item h3')[x].click()
         title = browser.find_by_css('h2.title').text
         element = browser.find_link_by_text('Sample').first
-        img_url = element['href']
-        hemispheres = {}
-        hemispheres['img_url'] = f'https://marshemispheres.com/{img_url}'
+        hemispheres['img_url'] = element['href']
+        #hemispheres['img_url'] = f'https://marshemispheres.com/{img_url}'
         hemispheres['title'] = title
         hemisphere_image_urls.append(hemispheres)
         browser.back()
